@@ -1,0 +1,2 @@
+## RAG setup for Government compliant applications
+This is the first attempt at building a POC for governmental RAG applications, utilizing MCP protocol, QDrant, langchain, open webui and as much efficient code as possible.
