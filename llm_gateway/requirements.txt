@@ -1,0 +1,4 @@
+litellm[proxy]
+uvicorn
+python-dotenv
+fastapi 

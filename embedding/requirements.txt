@@ -1,0 +1,9 @@
+langchain
+langchain-community
+langchain-huggingface
+qdrant-client
+sentence-transformers
+torch
+# Add other specific versions if necessary, e.g., torch==2.0.1
+# Ensure transformers is also included if HuggingFaceEmbeddings requires a specific version not pulled by sentence-transformers
+transformers 

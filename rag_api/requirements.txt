@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+langchain
+langchain-community
+langchain-openai
+langchain-huggingface
+langchain-qdrant
+qdrant-client
+huggingface-hub
+sentence-transformers
