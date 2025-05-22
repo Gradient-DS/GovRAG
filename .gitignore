@@ -183,5 +183,5 @@ cython_debug/
 .cursorindexingignore
 
 
-qdrant_storage
-dev_env
+qdrant_storage/
+dev_env/

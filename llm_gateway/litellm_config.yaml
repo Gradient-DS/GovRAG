@@ -1,3 +1,8 @@
+environment_variables:
+  HF_LLAMA_70B: ${HF_LLAMA_70B}
+  HF_QWEN_3_235B: ${HF_QWEN_3_235B}
+  HF_API_KEY: ${HF_API_KEY}
+
 model_list:
   - model_name: "os.environ/HF_LLAMA_70B"
     litellm_params:
