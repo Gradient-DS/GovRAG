@@ -1,6 +1,3 @@
-volumes:
-  scraped_data_volume:
-
 services:
   qdrant:
     image: qdrant/qdrant
@@ -9,37 +6,33 @@ services:
     volumes:
       - ./qdrant_storage:/qdrant/storage
 
+  mcp-nos:
+    build:
+      context: .
+      dockerfile: ./mcp/mcp-nos/Dockerfile
+    ports:
+      - "8001:8001"
+    depends_on:
+      - qdrant
+
   openwebui:
     build: ./openwebui
     ports:
       - "3000:8080"
     environment:
-      - OPENAI_API_BASE_URL=http://llm_gateway:8000/v1   # <- correct var + /v1
-      - OPENAI_API_KEY=${HF_API_KEY}
-      - OLLAMA_BASE_URL=disabled     
+      - OPENAI_API_BASE_URL=http://llm_gateway:8000/v1
+      - MCP_ENDPOINTS_NOS=http://mcp-nos:8001
     depends_on:
-      - rag-api
       - llm_gateway
-
-  rag-api:
-    build: ./rag_api
-    ports:
-      - "5000:5000"
-    environment:
-      - QDRANT_URL=http://qdrant:6333
-      - OPENAI_API_BASE=http://llm_gateway:8000/v1
-      - OPENAI_API_KEY=dummy_key
-      - LLM_MODEL_NAME=custom_huggingface_model
-    depends_on:
-      - qdrant
-      - llm_gateway
+      - mcp-nos
 
   llm_gateway:
     build: ./llm_gateway
     ports:
       - "8000:8000"
     environment:
-      - LLM_GATEWAY_HF_MODEL_ID=${LLM_GATEWAY_HF_MODEL_ID}
+      - HF_LLAMA_70B=${HF_LLAMA_70B}
+      - HF_QWEN_3_235B=${HF_QWEN_3_235B}
       - HF_API_KEY=${HF_API_KEY}
       - LITELLM_CONFIG_PATH=/app/litellm_config.yaml
 
@@ -52,8 +45,11 @@ services:
   embedding:
     build: ./embedding
     volumes:
-      - scraped_data_volume:/data
+      - scraped_data_volume:/app/data   # ← same mount as scraper!
     command: ["python", "embed_and_store.py"]
     depends_on:
       - scraper
       - qdrant
+
+volumes:
+  scraped_data_volume:

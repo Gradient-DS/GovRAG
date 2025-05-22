@@ -1,18 +1,16 @@
 model_list:
-  - model_name: custom_huggingface_model # This is the name OpenWebUI and rag-api will refer to
+  - model_name: "os.environ/HF_LLAMA_70B"
     litellm_params:
-      model: huggingface/${LLM_GATEWAY_HF_MODEL_ID} # Reads from environment variable
-      api_key: ${HF_API_KEY}                      # Reads from environment variable
-      # You can add other parameters here if needed, e.g., for specific tasks or custom Hugging Face API URLs
-      # Example for a different API base for HF:
-      # api_base: "https://your-custom-hf-inference-endpoint.com"
+      model: "os.environ/HF_LLAMA_70B"
+      api_key: "os.environ/HF_API_KEY"
 
-litemotion_settings:
-  # This enables the OpenAI compatible proxy server features
-  # For more advanced configurations, refer to LiteLLM documentation
-  drop_params: True # Drops unsupported OpenAI parameters before sending to HuggingFace
+  - model_name: "os.environ/HF_QWEN_3_235B"
+    litellm_params:
+      model: "os.environ/HF_QWEN_3_235B"
+      api_key: "os.environ/HF_API_KEY"
+
+litellm_settings:
+  drop_params: True
 
 router_settings:
-  # If you had multiple models, you could define routing strategies here
-  # For a single model, defaults are usually fine
-  pass_openai_headers: True # allow open ai headers to be passed from client to litellm proxy 
+  pass_openai_headers: True

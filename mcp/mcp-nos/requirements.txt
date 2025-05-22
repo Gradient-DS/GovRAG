@@ -1,0 +1,13 @@
+# core
+
+fastmcp>=2.1.0
+mcpo>=0.0.14
+
+# extras / helpers
+qdrant-client
+mcp[cli]>=0.5.0
+httpx
+
+langchain-huggingface>=0.0.2
+langchain-community>=0.0.17
+langchain-core>=0.0.10
