@@ -1,3 +1,4 @@
+_Public_
 ## RAG setup for Government compliant applications
 GovRAG is a minimal setup (POC) for governmental RAG applications, utilizing MCP protocol, QDrant, open webui and litellm. 
 
